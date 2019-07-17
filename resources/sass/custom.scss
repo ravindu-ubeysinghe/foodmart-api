@@ -1,0 +1,65 @@
+// IMPORTS
+
+// @import url('https://fonts.googleapis.com/css?family=BenchNine|Cormorant+Garamond|Fira+Sans+Condensed');
+@import url('https://fonts.googleapis.com/css?family=Handlee|Montserrat+Alternates|Unica+One');
+
+//VARS
+
+$fc_bg_color: #773275;
+$fc_bg_color_empty: #ffffff;
+$fc_button_hover_dark: #481947;
+// $fc_main_font: 'Merienda', cursive;
+$fc_main_font: 'Montserrat Alternates', sans-serif;
+
+// Custom styling - Ravindu - 03-02-2019
+
+body{
+	background-color: $fc_bg_color_empty;
+	font-family: $fc_main_font;
+}
+
+header{
+	background-color: $fc_bg_color !important;
+
+	.bg-dark{
+		background-color: $fc_bg_color !important;
+	}
+
+	.navbar{
+		padding-left: 0px !important;
+		padding-right: 0px !important;
+	}
+
+	.navbar-brand{
+		img{
+			max-width: 120px;
+		}
+	}
+
+	.btn-outline-success{
+		color: #ffffff !important;
+    border-color: #ffffff !important;
+	}
+
+	.btn-outline-success:hover{
+		background-color: $fc_button_hover_dark !important;
+	}
+
+	.nav-item:hover{
+		background-color: $fc_button_hover_dark !important;
+	}
+
+	a.nav-link{
+		color: #ffffff !important;
+	}
+}
+
+.fc-site-content{
+	margin: 30px 0px;
+}
+
+footer{
+	background-color: $fc_bg_color !important;
+	color: #ffffff;
+	padding: 30px 0px;
+}

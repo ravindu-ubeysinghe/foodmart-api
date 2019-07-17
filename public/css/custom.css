@@ -1,0 +1,49 @@
+@import url(https://fonts.googleapis.com/css?family=Handlee|Montserrat+Alternates|Unica+One);body {
+  background-color: #ffffff;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
+header {
+  background-color: #773275 !important;
+}
+
+header .bg-dark {
+  background-color: #773275 !important;
+}
+
+header .navbar {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+header .navbar-brand img {
+  max-width: 120px;
+}
+
+header .btn-outline-success {
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+header .btn-outline-success:hover {
+  background-color: #481947 !important;
+}
+
+header .nav-item:hover {
+  background-color: #481947 !important;
+}
+
+header a.nav-link {
+  color: #ffffff !important;
+}
+
+.fc-site-content {
+  margin: 30px 0px;
+}
+
+footer {
+  background-color: #773275 !important;
+  color: #ffffff;
+  padding: 30px 0px;
+}
+
