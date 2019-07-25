@@ -21,13 +21,20 @@ class SiteController extends Controller
       $site = Site::where('domain', $domain)->first();
       $components = Component::where('domain', $domain)->get();
       $pages = Page::where('domain', $domain)->get();
-
-      return response()->json([
-        'success' => true,
-        'site' => $site,
-        'pages' => $pages,
-        'components' => $components
-      ]);
+      
+      if ($site){
+        return response()->json([
+          'success' => true,
+          'site' => $site,
+          'pages' => $pages,
+          'components' => $components
+        ], 200);  
+      } else {
+        return response()->json([
+          'success' => false,
+          'error_message' => 'Site requested does not exist',
+        ], 404);  
+      }
 
       // ERROR ? success => false, error => error_message(string)
     }
