@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/page', 'PageController@getAllPages')->name('pages.all');
+Route::get('/pages', 'PageController@getAllPages')->name('pages.all');
 
 Route::get('/site', 'SiteController@getFullSite')->name('site.fullSite');
+
+Route::get('/search/products', 'SearchController@searchByProductName')->name('search.products.name');

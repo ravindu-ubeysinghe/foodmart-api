@@ -16,26 +16,32 @@ class SiteController extends Controller
       ]);
     }
 
-    public function getFullSite(Request $request){
-      $domain = $request->input('domain');
-      $site = Site::where('domain', $domain)->first();
-      $components = Component::where('domain', $domain)->get();
-      $pages = Page::where('domain', $domain)->get();
+    public function getFullSite(){
+      // with validators 
+      $data = request()->validate([
+        'domain' => 'required',
+      ]);
       
-      if ($site){
-        return response()->json([
-          'success' => true,
-          'site' => $site,
-          'pages' => $pages,
-          'components' => $components
-        ], 200);  
-      } else {
-        return response()->json([
-          'success' => false,
-          'error_message' => 'Site requested does not exist',
-        ], 404);  
-      }
+      if($data) {
+        $site = Site::getSiteByDomain($data['domain']);
 
+        if($site) {
+          $components = $site->components()->get() ?: [];
+          $pages = $site->pages()->get() ?: [];
+  
+          return response()->json([
+            'success' => true,
+            'site' => $site,
+            'pages' => $pages,
+            'components' => $components,
+          ], 200);  
+        }
+      }
+      
+      return response()->json([
+        'success' => false,
+        'error_message' => 'Site requested does not exist',
+      ], 404);
       // ERROR ? success => false, error => error_message(string)
     }
 }

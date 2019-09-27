@@ -7,4 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
+    public $table = 'page';
+    
+    protected $guarded = [];
+
+    public function site() {
+        $this->belongsTo(Site::class);
+    }
 }
