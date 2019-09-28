@@ -10,6 +10,8 @@ class SearchController extends Controller
         return 'search';
     }
 
+    private $mainSites = ['foodmart.com.au', 'cartmart.com.au'];
+
     /**
      * String: 'domain': String e.g. food within which the search is to be performed
      * String: 'q': which is the actual search query
@@ -22,14 +24,33 @@ class SearchController extends Controller
       ]);
 
       if ($data) {
-        $site = Site::getSiteByDomain($data['domain']);
+        $domain = $data['domain'];
+        $domains = [];
+        $siteProducts = [];
 
-        $site_products = $site ? $site->products()->get() : [];
+        if (in_array($domain, $this->mainSites)) {
+          $domains = Site::where('category', $domain)
+                        ->get(['domain'])
+                        ->pluck('domain')
+                        ->toArray() ?: [];
+        }
+
+        if(empty($domains)) {
+          $site = Site::getSiteByDomain($domain);
+          $siteProducts = $site ? $site->products()->get() : [];
+        } else {
+          // For main category sites
+          foreach ($domains as $tempDomain) {
+            $site = Site::getSiteByDomain($tempDomain);
+            $tempSiteProducts = $site ? $site->products()->get()->toArray() : [];
+            array_push($siteProducts, ...$tempSiteProducts);
+          }
+        }
         
-        if ($site_products){
+        if ($siteProducts){
           return response()->json([
             'success' => true,
-            'products' => $site_products,
+            'products' => $siteProducts,
           ], 200);
         }
       }
